@@ -7,8 +7,8 @@ class HeroShip {
         this.heroShip.setAttribute("y", "650");
         this.heroShip.setAttribute("width", "50");
         this.heroShip.setAttribute("height", "20"); 
-        this.rectangulo.setAttribute("fill", "green");
-        document.getElementById('pantalla').appendChild(this.heroShip);
+        this.heroShip.setAttribute("fill", "green");
+        document.getElementById('screen').appendChild(this.heroShip);
     }
     
     moveLeft() {
@@ -19,6 +19,10 @@ class HeroShip {
     moveRight() {
         if((this.actualPositionX + this.speed) <= 1000)
             this.actualPositionX += this.speed; 
+    }
+    
+    shot() {
+        
     }
     
     draw() {
