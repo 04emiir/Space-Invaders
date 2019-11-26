@@ -8,6 +8,8 @@ class HeroShip {
         this.heroShip.setAttribute("width", "50");
         this.heroShip.setAttribute("height", "20"); 
         this.heroShip.setAttribute("fill", "green");
+        this.SVGWidth = parseInt(document.getElementById('screen').getAttribute("width"));
+        this.heroShipWidth = parseInt(this.heroShip.setAttribute("x"); 
         document.getElementById('screen').appendChild(this.heroShip);
     }
     
@@ -17,7 +19,7 @@ class HeroShip {
     }
     
     moveRight() {
-        if((this.actualPositionX + this.speed) <= 1000)
+        if((this.actualPositionX + this.speed + this.heroShipWidth ) <= this.SVGWidth)
             this.actualPositionX += this.speed; 
     }
     
