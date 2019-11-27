@@ -1,4 +1,10 @@
-svg {
+#gameScreen {
     display: block;
     margin: auto;
+}
+
+#gameBorder {
+    fill: black;
+    stroke-width: 5;
+    stroke: rgb(0,100,0);   
 }

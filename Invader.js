@@ -1,4 +1,4 @@
-class Invader{
+export class Invader{
     constructor(positionX, positionY, height, width){
         this.positionX = positionX;
         this.positionY = positionY;

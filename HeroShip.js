@@ -1,4 +1,4 @@
-class HeroShip {
+export class HeroShip {
     constructor() {
         this.heroShip = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.speed = 5;
@@ -8,9 +8,9 @@ class HeroShip {
         this.heroShip.setAttribute("width", "50");
         this.heroShip.setAttribute("height", "20"); 
         this.heroShip.setAttribute("fill", "green");
-        this.SVGWidth = parseInt(document.getElementById('screen').getAttribute("width"));
-        this.heroShipWidth = parseInt(this.heroShip.setAttribute("x"); 
-        document.getElementById('screen').appendChild(this.heroShip);
+        this.SVGWidth = parseInt(document.getElementById('gameScreen').getAttribute("width"));
+        this.heroShipWidth = parseInt(this.heroShip.getAttribute("x")); 
+        document.getElementById('gameScreen').appendChild(this.heroShip);
     }
     
     moveLeft() {

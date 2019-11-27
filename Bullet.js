@@ -1,4 +1,4 @@
-class Bullet {
+export class Bullet {
     constructor(startX, startY, endX, endY) {
         this.startX = startX;
         this.startY = startY;
