@@ -1,8 +1,7 @@
 # Space-Invaders
-PLEASE USE ONLY ENGLISH MIGUE, IN EVERYTHING.
-PLEASE DO A PULL BEFORE STARTING.
+PLEASE USE ONLY ENGLISH.
 LONG LIFE MOTHER RUSSIA. 
 
+υπέροχο!
 
-
-                                                      (ejmr was here, you are a loser.)
+                       
