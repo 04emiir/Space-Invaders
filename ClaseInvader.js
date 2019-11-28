@@ -15,10 +15,10 @@ class Invader{
     }
 
     moverDerecha(){
-        
+
     }
 
     bajar(){
-
+        
     }
 }
