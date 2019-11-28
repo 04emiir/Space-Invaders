@@ -19,8 +19,7 @@ export class HeroShip {
     }
     
     moveRight() {
-        var sum = this.positionX + this.speed + this.heroShipWidth;
-        if((sum) <= this.SVGWidth)
+        if((this.positionX + this.speed + this.heroShipWidth) <= this.SVGWidth)
             this.positionX += this.speed; 
     }
     
