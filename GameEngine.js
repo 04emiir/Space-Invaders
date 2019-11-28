@@ -1,6 +1,6 @@
-import {Bullet} from "./Bullet.js";
-import {HeroShip} from "./HeroShip.js";
-import {Invader} from "./Invader.js";
+import { Bullet } from "./Bullet.js";
+import { HeroShip } from "./HeroShip.js";
+import { Invader } from "./Invader.js";
 
 class GameEngine {
     constructor() {
@@ -36,16 +36,16 @@ window.onload = () => {
     gameScreen.setAttribute("height", "700px");
     gameScreen.id = "gameScreen";
     document.body.appendChild(gameScreen);
-    
+
     var gameBorder = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    gameBorder.setAttribute("x", "0"); 
-    gameBorder.setAttribute("y", "0"); 
-    gameBorder.setAttribute("width", "1000"); 
-    gameBorder.setAttribute("height", "700"); 
+    gameBorder.setAttribute("x", "0");
+    gameBorder.setAttribute("y", "0");
+    gameBorder.setAttribute("width", "1000");
+    gameBorder.setAttribute("height", "700");
     gameBorder.id = "gameBorder";
     gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
     document.getElementById('gameScreen').appendChild(gameBorder);
-    
+
     var gameEngine = new GameEngine();
     
     setInterval(() => {
@@ -62,6 +62,6 @@ window.onload = () => {
 
 }
 
-     
+
 
 

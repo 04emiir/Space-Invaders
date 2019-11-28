@@ -1,24 +1,43 @@
-export class Invader{
-    constructor(positionX, positionY, height, width){
+import { Bullet } from './Bullet.js';
+
+export class Invader {
+    constructor(positionX, positionY, height, width) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.height = height;
         this.width = width;
+        this.tag = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        this.tag.setAttribute("x", positionX);
+        this.tag.setAttribute("y", positionY);
+        this.tag.setAttribute("fill", "green");
+        this.tag.setAttribute("width", width);
+        this.tag.setAttribute("height", height);
+        document.getElementsByTagName("svg")[0].appendChild(this.tag);
     }
 
-    shot(){
-
+    shot() {
+        var bullet = new Bullet(this.positionX, this.positionY, this.positionX, this.positionY + 700);
     }
 
-    moveLeft(){
-
+    moveLeft(speed) {
+        this.positionX -= speed;
     }
 
-    moveRight(){
-        
+    moveRight(speed) {
+        this.positionX += speed;
     }
 
-    goDown(){
-
+    goDown(speed) {
+        this.positionY += speed;
     }
+
+    draw() {
+        this.tag.setAttribute("x", this.positionX);
+        this.tag.setAttribute("y", this.positionY);
+    }
+
+    destroy() {
+        this.tag.parentElement.removeChild(this.tag);
+    }
+
 }
