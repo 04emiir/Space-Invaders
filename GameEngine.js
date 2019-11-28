@@ -7,27 +7,21 @@ class GameEngine {
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
         document.onkeydown= (e) => this.keyboardInput(e); 
-        this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-        this.bulletStartY = (this.heroShip.positionY + 2);
-        this.bulletEndY = (this.heroShip.positionY + 8);
     }
     
     keyboardInput(e) {
         var key = e.key;
         if(key == "a" || key == "A") {
-            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-            this.bulletStartY = (this.heroShip.positionY + 2);
-            this.bulletEndY = (this.heroShip.positionY + 8);
             this.heroShip.moveLeft();
             this.heroShip.draw();
         } else if(key == "d" || key == "D") {
-            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-            this.bulletStartY = (this.heroShip.positionY + 2);
-            this.bulletEndY = (this.heroShip.positionY + 8);
             this.heroShip.moveRight();
             this.heroShip.draw();
         } else if(key == " ") {
-            var bullet = new Bullet(this.bulletX, this.bulletStartY, this.bulletX, this.bulletEndY);
+            var bulletX = this.heroShip.centerOfHeroShip;
+            var bulletStartY = (this.heroShip.positionY - 5);
+            var bulletEndY = (this.heroShip.positionY - 20);
+            var bullet = new Bullet(bulletX, bulletStartY, bulletX, bulletEndY);
             this.arrayBullets.push(bullet);
         }
     }
@@ -55,11 +49,15 @@ window.onload = () => {
     var gameEngine = new GameEngine();
     
     setInterval(() => {
-        for(var bala of gameEngine.arrayBullets) {
-            bala.moveUp();
-            bala.draw();
+        for(var bulletShot of gameEngine.arrayBullets) {
+            bulletShot.moveUp();
+            bulletShot.draw();
+            if (bulletShot.startY - bulletShot.speed <= 0) {
+                gameEngine.arrayBullets.splice(0, 1);
+                bulletShot.disappear();
+            }
         }
-    }, 100);
+    }, 10);
     
 
 }

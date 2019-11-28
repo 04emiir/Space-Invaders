@@ -1,7 +1,7 @@
 export class HeroShip {
     constructor() {
         this.heroShip = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        this.speed = 5;
+        this.speed = 7;
         this.heroShip.setAttribute("x", "475");
         this.heroShip.setAttribute("y", "650");
         this.heroShip.setAttribute("width", "50");

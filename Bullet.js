@@ -5,7 +5,7 @@ export class Bullet{
         this.startY = startY;
         this.endX =  endX;
         this.endY = endY;
-        this.speed = 5;
+        this.speed = 2;
         
         //the start is first when shot by the invaders (example startY=0, endY=5)
         //the end is first when shot by the heroShip (example startY=900, endY=895)
@@ -13,22 +13,22 @@ export class Bullet{
         this.bullet.setAttribute("y1", this.startY);
         this.bullet.setAttribute("x2", this.endX);
         this.bullet.setAttribute("y2", this.endY); 
-        this.bullet.setAttribute("style", "stroke:rgb(0,100,0);stroke-width:3");
+        this.bullet.setAttribute("style", "stroke:rgb(0,100,0);stroke-width:4");
         this.SVGHeight = parseInt(document.getElementById('gameScreen').getAttribute("height"));
         document.getElementById('gameScreen').appendChild(this.bullet);
     }
     
     //when the heroShip shoots.
     moveUp() {
-        if((this.endY - this.speed) >= 0) {
+        if((this.startY - this.speed) >= 0) {
             this.endY -= this.speed;
             this.startY -= this.speed;
-        }
+        }        
     }
     
     //when the invaders shoot.
     moveDown() {
-        if((this.endY + this.speed) <= this.SVGHeight) {
+        if((this.startY + this.speed) <= this.SVGHeight) {
             this.endY += this.speed;
             this.startY += this.speed;
         }
@@ -37,5 +37,9 @@ export class Bullet{
     draw() {
         this.bullet.setAttribute("y1", this.startY);
         this.bullet.setAttribute("y2", this.endY);
+    }
+    
+    disappear() {
+        document.getElementById('gameScreen').removeChild(this.bullet);
     }
 }
