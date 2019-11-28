@@ -5,19 +5,33 @@ import {Invader} from "./Invader.js";
 class GameEngine {
     constructor() {
         this.heroShip = new HeroShip();
-        document.onkeydown= (e) => this.moveHeroShip(e); 
+        this.arrayBullets = new Array();
+        document.onkeydown= (e) => this.keyboardInput(e); 
+        this.bulletX = (this.heroShip.centerOfHeroShip - 1);
+        this.bulletStartY = (this.heroShip.positionY + 2);
+        this.bulletEndY = (this.heroShip.positionY + 8);
     }
     
-    moveHeroShip(e) {
+    keyboardInput(e) {
         var key = e.key;
         if(key == "a" || key == "A") {
+            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
+            this.bulletStartY = (this.heroShip.positionY + 2);
+            this.bulletEndY = (this.heroShip.positionY + 8);
             this.heroShip.moveLeft();
             this.heroShip.draw();
         } else if(key == "d" || key == "D") {
+            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
+            this.bulletStartY = (this.heroShip.positionY + 2);
+            this.bulletEndY = (this.heroShip.positionY + 8);
             this.heroShip.moveRight();
             this.heroShip.draw();
-        } 
+        } else if(key == " ") {
+            var bullet = new Bullet(this.bulletX, this.bulletStartY, this.bulletX, this.bulletEndY);
+            this.arrayBullets.push(bullet);
+        }
     }
+    
 }
 
 
@@ -39,6 +53,13 @@ window.onload = () => {
     document.getElementById('gameScreen').appendChild(gameBorder);
     
     var gameEngine = new GameEngine();
+    
+    setInterval(() => {
+        for(var bala of gameEngine.arrayBullets) {
+            bala.moveUp();
+            bala.draw();
+        }
+    }, 100);
     
 
 }
