@@ -10,6 +10,7 @@ class GameEngine {
     }
     
     keyboardInput(e) {
+        document.getElementById("bgSound").play();
         var key = e.key;
         if(key == "a" || key == "A") {
             this.heroShip.moveLeft();
@@ -18,6 +19,7 @@ class GameEngine {
             this.heroShip.moveRight();
             this.heroShip.draw();
         } else if(key == " ") {
+            document.getElementById("bullet").play();
             var bulletX = this.heroShip.centerOfHeroShip;
             var bulletStartY = (this.heroShip.positionY - 5);
             var bulletEndY = (this.heroShip.positionY - 20);
@@ -45,7 +47,20 @@ window.onload = () => {
     gameBorder.id = "gameBorder";
     gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
     document.getElementById('gameScreen').appendChild(gameBorder);
-
+    
+    var bulletSound = document.createElement("AUDIO");
+    bulletSound.src = "bullet.mp3"
+    bulletSound.controls = false;
+    bulletSound.id = "bullet";
+    document.body.appendChild(bulletSound);
+    
+    var bgSound = document.createElement("AUDIO");
+    bgSound.src = "howard.mp3"
+    bgSound.controls = false;
+    bgSound.id = "bgSound";
+    bgSound.loop = true;
+    document.body.appendChild(bgSound);
+    
     var gameEngine = new GameEngine();
     
     setInterval(() => {
