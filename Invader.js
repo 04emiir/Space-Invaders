@@ -1,6 +1,6 @@
 import { Bullet } from './Bullet.js';
 
-class Invader {
+export class Invader {
     constructor(positionX, positionY, height, width) {
         this.positionX = positionX;
         this.positionY = positionY;
