@@ -6,28 +6,24 @@ class GameEngine {
     constructor() {
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
-        document.onkeydown = (e) => this.keyboardInput(e);
-        this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-        this.bulletStartY = (this.heroShip.positionY + 2);
-        this.bulletEndY = (this.heroShip.positionY + 8);
+        document.onkeydown= (e) => this.keyboardInput(e); 
     }
 
     keyboardInput(e) {
+        document.getElementById("bgSound").play();
         var key = e.key;
-        if (key == "a" || key == "A") {
-            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-            this.bulletStartY = (this.heroShip.positionY + 2);
-            this.bulletEndY = (this.heroShip.positionY + 8);
+        if(key == "a" || key == "A") {
             this.heroShip.moveLeft();
             this.heroShip.draw();
-        } else if (key == "d" || key == "D") {
-            this.bulletX = (this.heroShip.centerOfHeroShip - 1);
-            this.bulletStartY = (this.heroShip.positionY + 2);
-            this.bulletEndY = (this.heroShip.positionY + 8);
+        } else if(key == "d" || key == "D") {
             this.heroShip.moveRight();
             this.heroShip.draw();
-        } else if (key == " ") {
-            var bullet = new Bullet(this.bulletX, this.bulletStartY, this.bulletX, this.bulletEndY);
+        } else if(key == " ") {
+            document.getElementById("bullet").play();
+            var bulletX = this.heroShip.centerOfHeroShip;
+            var bulletStartY = (this.heroShip.positionY - 5);
+            var bulletEndY = (this.heroShip.positionY - 20);
+            var bullet = new Bullet(bulletX, bulletStartY, bulletX, bulletEndY);
             this.arrayBullets.push(bullet);
         }
     }
@@ -65,15 +61,33 @@ window.onload = () => {
     gameBorder.id = "gameBorder";
     gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
     document.getElementById('gameScreen').appendChild(gameBorder);
+    
+    var bulletSound = document.createElement("AUDIO");
+    bulletSound.src = "bullet.mp3"
+    bulletSound.controls = false;
+    bulletSound.id = "bullet";
+    document.body.appendChild(bulletSound);
+    
+    var bgSound = document.createElement("AUDIO");
+    bgSound.src = "howard.mp3"
+    bgSound.controls = false;
+    bgSound.id = "bgSound";
+    bgSound.loop = true;
+    document.body.appendChild(bgSound);
+    
     var gameEngine = new GameEngine();
     gameEngine.addInvaders();
     setInterval(() => {
-        for (var bala of gameEngine.arrayBullets) {
-            bala.moveUp();
-            bala.draw();
+        for(var bulletShot of gameEngine.arrayBullets) {
+            bulletShot.moveUp();
+            bulletShot.draw();
+            if (bulletShot.startY - bulletShot.speed <= 0) {
+                gameEngine.arrayBullets.splice(0, 1);
+                bulletShot.disappear();
+            }
         }
-    }, 100);
-
+    }, 10);
+    
 
 }
 
