@@ -7,6 +7,8 @@ class GameEngine {
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
         this.arrayInvader = new Array();
+        this.pressedA = null;
+        this.pressedD = null;
         document.onkeydown= (e) => this.keyboardInput(e); 
     }
 
@@ -14,11 +16,11 @@ class GameEngine {
         document.getElementById("bgSound").play();
         var key = e.key;
         if(key == "a" || key == "A") {
-            this.heroShip.moveLeft();
-            this.heroShip.draw();
+            this.pressedA = true;
+            this.pressedD = false;
         } else if(key == "d" || key == "D") {
-            this.heroShip.moveRight();
-            this.heroShip.draw();
+            this.pressedA = false;
+            this.pressedD = true;
         } else if(key == " ") {
             document.getElementById("bullet").play();
             var bulletX = this.heroShip.centerOfHeroShip;
@@ -83,6 +85,18 @@ window.onload = () => {
     var gameEngine = new GameEngine();
     gameEngine.addInvaders();
     setInterval(() => {
+        if(gameEngine.pressedA && !gameEngine.pressedD) {
+            gameEngine.heroShip.moveLeft();
+            gameEngine.heroShip.draw();
+            gameEngine.pressedA = null;
+            gameEngine.pressedD = null;
+        } else if(gameEngine.pressedD && !gameEngine.pressedA) {
+            gameEngine.heroShip.moveRight();
+            gameEngine.heroShip.draw();
+            gameEngine.pressedA = null;
+            gameEngine.pressedD = null;
+        }
+        
         for(var bulletShot of gameEngine.arrayBullets) {
             bulletShot.moveUp();
             bulletShot.draw();
@@ -93,10 +107,9 @@ window.onload = () => {
         }
         for(var alien of gameEngine.arrayInvader) {
             alien.wholeMovement();
-        }
-        for(var alien of gameEngine.arrayInvader) {
             alien.draw();
         }
+
     }, 10);
     
 
