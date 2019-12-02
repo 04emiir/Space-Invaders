@@ -8,7 +8,7 @@ export class Invader {
         this.positionY = positionY;
         this.height = height;
         this.width = width;
-        this.speed = 3;
+        this.speed = 0.5;
         
         //  Attributes for Invader<invader>
         this.invader.setAttribute("x", positionX);
@@ -49,6 +49,10 @@ export class Invader {
         }
     }
 
+    moveDown(){
+        this.positionY =+1;
+    }
+
     //  1. Variable "positionX" will be changed if the result of the Invader current 
     //  position (X Axis) plus the base speed plus the Invader width is lesser or equal 
     //  than the SVG right limit (1000 by default).
@@ -56,6 +60,7 @@ export class Invader {
     moveRight() {
         if((this.positionX + this.speed + this.invaderWidth) <= this.SVGWidth) {
             this.positionX += this.speed; 
+            this.positionY += 0;
         } else {
             this.invaderDirection = false;  
         }
@@ -72,15 +77,11 @@ export class Invader {
         
     }
 
-    /* TO BE ADDED (AFTER INVADER MOVEMENT LEFT-RIGHT)
-    goDown(speed) {
-        this.positionY += speed;
-    }
-    */
         
     //  Set the attribute x (where the Inavder<rect> starts).
     draw() {
         this.invader.setAttribute("x", this.positionX);
+        this.invader.setAttribute("y", this.positionY);
         /* TO BE ADDED (ALONGSIDE goDown()
         )
         this.tag.setAttribute("y", this.positionY);
