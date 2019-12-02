@@ -30,21 +30,18 @@ class GameEngine {
 
     addInvaders() {
         var arrayInvaders = new Array();
-        var widthTotal = 0;
+        var widthTotal = 300;
         var heightTotal = 10
         while (heightTotal < 200) {
             arrayInvaders.push(new Invader(widthTotal, heightTotal));
             widthTotal += 100;
-            if (widthTotal > 1000) {
-                widthTotal = 0;
+            if (widthTotal > 700) {
+                widthTotal = 300;
                 heightTotal += 40
             }
         }
     }
-
 }
-
-
 
 window.onload = () => {
     var gameScreen = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -87,10 +84,4 @@ window.onload = () => {
             }
         }
     }, 10);
-    
-
 }
-
-
-
-
