@@ -2,42 +2,95 @@ import { Bullet } from './Bullet.js';
 
 export class Invader {
     constructor(positionX, positionY, height=30, width=60) {
+        //  Creation of the Invader<rect> and some variables
+        this.invader = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.positionX = positionX;
         this.positionY = positionY;
         this.height = height;
         this.width = width;
-        this.tag = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        this.tag.setAttribute("x", positionX);
-        this.tag.setAttribute("y", positionY);
-        this.tag.setAttribute("fill", "yellow");
-        this.tag.setAttribute("width", width);
-        this.tag.setAttribute("height", height);
-        document.getElementsByTagName("svg")[0].appendChild(this.tag);
+        this.speed = 3;
+        
+        //  Attributes for Invader<invader>
+        this.invader.setAttribute("x", positionX);
+        this.invader.setAttribute("y", positionY);
+        this.invader.setAttribute("fill", "yellow");
+        this.invader.setAttribute("width", width);
+        this.invader.setAttribute("height", height);
+        
+        //  Helpful variable
+        this.invaderWidth = parseInt(this.invader.getAttribute("width")); 
+        
+        //  true means a positive X movement. false means a negative X movement.
+        this.invaderDirection = true;
+        
+        //  Variable for measuring the SVG maximum width. Minimum width is 0. Also in HeroShip.
+        this.SVGWidth = parseInt(document.getElementById('gameScreen').getAttribute("width"));
+        
+        //  Adding Invader<rect> to the SVG
+        document.getElementById('gameScreen').appendChild(this.invader);
     }
 
+    /* TO BE ADDED (AFTER INVADER MOVEMENT)
+    
     shot() {
         var bullet = new Bullet(this.positionX, this.positionY, this.positionX, this.positionY + 700);
     }
-
-    moveLeft(speed) {
-        this.positionX -= speed;
+    */
+    
+    //  1. Variable "positionX" will be changed if the result of the Invader current 
+    //  position (X Axis) minus the base speed is greater or equal than 0 (SVG left limit).
+    //  2. If(!1.), a.k.a "upon touching the SVG right limit" "invaderDirection" will change
+    moveLeft() {
+        if((this.positionX - this.speed) >= 0) {
+            this.positionX -= this.speed;
+        }
+        else {
+           this.invaderDirection = true; 
+        }
     }
 
-    moveRight(speed) {
-        this.positionX += speed;
+    //  1. Variable "positionX" will be changed if the result of the Invader current 
+    //  position (X Axis) plus the base speed plus the Invader width is lesser or equal 
+    //  than the SVG right limit (1000 by default).
+    //  2. If(!1.), a.k.a "upon touching the SVG right limit" "invaderDirection" will change
+    moveRight() {
+        if((this.positionX + this.speed + this.invaderWidth) <= this.SVGWidth) {
+            this.positionX += this.speed; 
+        } else {
+            this.invaderDirection = false;  
+        }
+    }
+    
+    //  Group both left and right movement in one method, to determine the direction of 
+    //  the Invader, thanks to "invaderDirection".
+    wholeMovement() {
+        if (this.invaderDirection) {
+            this.moveRight();
+        } else {
+            this.moveLeft();
+        }
+        
     }
 
+    /* TO BE ADDED (AFTER INVADER MOVEMENT LEFT-RIGHT)
     goDown(speed) {
         this.positionY += speed;
     }
-
+    */
+        
+    //  Set the attribute x (where the Inavder<rect> starts).
     draw() {
-        this.tag.setAttribute("x", this.positionX);
+        this.invader.setAttribute("x", this.positionX);
+        /* TO BE ADDED (ALONGSIDE goDown()
+        )
         this.tag.setAttribute("y", this.positionY);
+        */
     }
 
     destroy() {
-        this.tag.parentElement.removeChild(this.tag);
+        document.getElementById('gameScreen').removeChild(this.invader);
     }
 
 }
+
+//  NOTE: AFTER SOME RUNNING TIME, THE INVADER STARTS MISPLACING
