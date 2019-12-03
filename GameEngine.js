@@ -13,6 +13,8 @@ class GameEngine {
         document.onkeydown = (e) => this.keyboardInput(e);
         this.invaderCanShoot = true;
         this.invaderCoolDown = null;
+        this.puedeDisparar = true;
+        this.cooldown = null;
     }
 
     keyboardInput(e) {
@@ -25,12 +27,20 @@ class GameEngine {
             this.pressedA = false;
             this.pressedD = true;
         } else if (key == " ") {
-            document.getElementById("bullet").play();
-            var bulletX = this.heroShip.centerOfHeroShip;
-            var bulletStartY = (this.heroShip.positionY - 5);
-            var bulletEndY = (this.heroShip.positionY - 20);
-            var bullet = new Bullet(bulletX, bulletStartY, bulletEndY);
-            this.arrayBullets.push(bullet);
+            if (this.puedeDisparar) {
+                document.getElementById("bullet").play();
+                var bulletX = this.heroShip.centerOfHeroShip;
+                var bulletStartY = (this.heroShip.positionY - 5);
+                var bulletEndY = (this.heroShip.positionY - 20);
+                var bullet = new Bullet(bulletX, bulletStartY, bulletEndY, "rgb(0,255,0)");
+                this.arrayBullets.push(bullet);
+                this.puedeDisparar = false;
+                this.cooldown = setTimeout(() => {
+                    this.puedeDisparar = true;
+                    this.cooldown = null;
+                }, 2000);
+            }
+
         }
     }
 
@@ -142,6 +152,16 @@ window.onload = () => {
             bulletShot.moveUp();
             bulletShot.draw();
 
+            for (let i = 0; i < gameEngine.arrayInvader.length; i++) {
+                if ((bulletShot.axisX >= gameEngine.arrayInvader[i].positionX) && (bulletShot.axisX <= gameEngine.arrayInvader[i].positionX + 60) && (bulletShot.endY <= gameEngine.arrayInvader[i].positionY + 30) && (bulletShot.endY >= gameEngine.arrayInvader[i].positionY)) {
+                    bulletShot.disappear();
+                    gameEngine.arrayBullets.splice(0, 1);
+                    gameEngine.arrayInvader[i].destroy();
+                    gameEngine.arrayInvader.splice(i, 1);
+                }
+
+            }
+
             if (bulletShot.startY - bulletShot.speed <= 0) {
                 gameEngine.arrayBullets.splice(0, 1);
                 bulletShot.disappear();
@@ -151,7 +171,10 @@ window.onload = () => {
         for (var bulletInvaderShot of gameEngine.arrayInvaderBullets) {
             bulletInvaderShot.moveDown();
             bulletInvaderShot.draw();
-
+            if ((bulletInvaderShot.axisX >= gameEngine.heroShip.positionX) && (bulletInvaderShot.axisX <= (gameEngine.heroShip.positionX + parseInt(gameEngine.heroShip.heroShip.getAttribute("width")))) && (bulletInvaderShot.endY > gameEngine.heroShip.positionY)) {
+                gameEngine.heroShip.destroy();
+                alert("HAS PERDIDO");
+            }
             if (bulletInvaderShot.startY + bulletInvaderShot.speed >= 700) {
                 gameEngine.arrayInvaderBullets.splice(0, 1);
                 bulletInvaderShot.disappear();
@@ -162,7 +185,8 @@ window.onload = () => {
             alien.wholeMovement();
             alien.draw();
         }
-
+        if (gameEngine.arrayInvader.length == 0)
+            alert("ganaste");
         gameEngine.invaderShoots();
         gameEngine.checkInvadersMoveDown();
 

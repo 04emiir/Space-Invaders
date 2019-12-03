@@ -86,16 +86,11 @@ export class Invader {
     draw() {
         this.invader.setAttribute("x", this.positionX);
         this.invader.setAttribute("y", this.positionY);
-        /* TO BE ADDED (ALONGSIDE goDown()
-        )
-        this.tag.setAttribute("y", this.positionY);
-        */
     }
 
     destroy() {
-        document.getElementById('gameScreen').removeChild(this.invader);
+        if(this.invader.parentElement.id=="gameScreen")
+            document.getElementById('gameScreen').removeChild(this.invader);
     }
 
 }
-
-//  NOTE: AFTER SOME RUNNING TIME, THE INVADER STARTS MISPLACING

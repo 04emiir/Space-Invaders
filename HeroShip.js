@@ -47,6 +47,9 @@ export class HeroShip {
         }
     }
 
+    destroy(){
+        this.heroShip.parentElement.removeChild(this.heroShip);
+    }
     //  Set the attribute x (where the HeroShip<rect> starts).
     draw() {
         this.heroShip.setAttribute("x", this.positionX);
