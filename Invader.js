@@ -20,6 +20,9 @@ export class Invader {
         //  Helpful variable
         this.invaderWidth = parseInt(this.invader.getAttribute("width")); 
         
+        //center of invader
+        this.centerOfInvader = this.positionX+(this.invaderWidth/2);
+
         //  true means a positive X movement. false means a negative X movement.
         this.invaderDirection = true;
         
@@ -43,6 +46,7 @@ export class Invader {
     moveLeft() {
         if((this.positionX - this.speed) >= 0) {
             this.positionX -= this.speed;
+            this.centerOfInvader=this.centerOfInvader = this.positionX+(this.invaderWidth/2);
         }
         else {
            this.invaderDirection = true; 
@@ -60,7 +64,7 @@ export class Invader {
     moveRight() {
         if((this.positionX + this.speed + this.invaderWidth) <= this.SVGWidth) {
             this.positionX += this.speed; 
-            this.positionY += 0;
+            this.centerOfInvader=this.centerOfInvader = this.positionX+(this.invaderWidth/2);
         } else {
             this.invaderDirection = false;  
         }

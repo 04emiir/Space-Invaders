@@ -6,10 +6,13 @@ class GameEngine {
     constructor() {
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
+        this.arrayInvaderBullets = new Array();
         this.arrayInvader = new Array();
         this.pressedA = null;
         this.pressedD = null;
         document.onkeydown = (e) => this.keyboardInput(e);
+        this.invaderCanShoot = true;
+        this.invaderCoolDown = null;
     }
 
     keyboardInput(e) {
@@ -68,6 +71,23 @@ class GameEngine {
             }
         }
     }
+
+    invaderShoots() {
+        if (this.invaderCanShoot) {
+            var randomInvader = parseInt(Math.random() * this.arrayInvader.length);
+            var invaderThatShoots = this.arrayInvader[randomInvader];
+            var invaderBulletX = invaderThatShoots.centerOfInvader;
+            var invaderStartY = invaderThatShoots.positionY + 30;
+            var invaderEndY = invaderThatShoots.positionY + 45;
+            var invaderBullet = new Bullet(invaderBulletX, invaderStartY, invaderEndY, "rgb(255,255,0)");
+            this.arrayInvaderBullets.push(invaderBullet);
+            this.invaderCanShoot = false;
+            this.invaderCoolDown = setTimeout(() => {
+                this.invaderCanShoot = true;
+                this.invaderCoolDown = null;
+            }, 2000);
+        }
+    }
 }
 
 window.onload = () => {
@@ -121,20 +141,30 @@ window.onload = () => {
         for (var bulletShot of gameEngine.arrayBullets) {
             bulletShot.moveUp();
             bulletShot.draw();
-            
+
             if (bulletShot.startY - bulletShot.speed <= 0) {
                 gameEngine.arrayBullets.splice(0, 1);
                 bulletShot.disappear();
             }
+        }
+
+        for (var bulletInvaderShot of gameEngine.arrayInvaderBullets) {
+            bulletInvaderShot.moveDown();
+            bulletInvaderShot.draw();
+
+            if (bulletInvaderShot.startY + bulletInvaderShot.speed >= 700) {
+                gameEngine.arrayInvaderBullets.splice(0, 1);
+                bulletInvaderShot.disappear();
+            }
+
         }
         for (var alien of gameEngine.arrayInvader) {
             alien.wholeMovement();
             alien.draw();
         }
 
-        for(let i = 0; i<=gameEngine.arrayInvader; i++){
-
-        }
+        gameEngine.invaderShoots();
         gameEngine.checkInvadersMoveDown();
+
     }, 10);
 }
