@@ -131,6 +131,7 @@ window.onload = () => {
     bgSound.controls = false;
     bgSound.id = "bgSound";
     bgSound.loop = true;
+    bgSound.volume = 0.6;
     document.body.appendChild(bgSound);
     
     
