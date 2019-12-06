@@ -4,6 +4,10 @@ import { Invader } from "./Invader.js";
 
 class GameEngine {
     constructor() {
+        this.createGameScreen();
+        this.createGameBorder();
+        this.createBulletSound();
+        this.createBackgroundMusic();
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
         this.arrayInvaderBullets = new Array();
@@ -15,6 +19,8 @@ class GameEngine {
         this.invaderCoolDown = null;
         this.puedeDisparar = true;
         this.cooldown = null;
+
+
     }
 
     keyboardInput(e) {
@@ -98,44 +104,54 @@ class GameEngine {
             }, 2000);
         }
     }
+
+    createGameScreen() {
+        //  Creation of the gameScreen<svg>, set attributes and addition to the HTML.
+        var gameScreen = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        gameScreen.setAttribute("width", "1000px");
+        gameScreen.setAttribute("height", "700px");
+        gameScreen.id = "gameScreen";
+        document.body.appendChild(gameScreen);
+    }
+
+    createGameBorder() {
+        //  Creation of the gameBorder<svg>, set attributes and addition to the gameBorder<svg>.
+        var gameBorder = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        gameBorder.setAttribute("x", "0");
+        gameBorder.setAttribute("y", "0");
+        gameBorder.setAttribute("width", "1000");
+        gameBorder.setAttribute("height", "700");
+        gameBorder.id = "gameBorder";
+        gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
+        document.getElementById('gameScreen').appendChild(gameBorder);
+    }
+
+    createBulletSound() {
+        //  Creation of the sound effect for HeroShip bullet.
+        var bulletSound = document.createElement("AUDIO");
+        bulletSound.src = "bullet.mp3"
+        bulletSound.controls = false;
+        bulletSound.id = "bullet";
+        document.body.appendChild(bulletSound);
+    }
+
+    createBackgroundMusic() {
+        //  Creation of the background music.
+        var bgSound = document.createElement("AUDIO");
+        bgSound.src = "howard.mp3"
+        bgSound.controls = false;
+        bgSound.id = "bgSound";
+        bgSound.loop = true;
+        document.body.appendChild(bgSound);
+    }
 }
 
-window.onload = () => {
-    //  Creation of the gameScreen<svg>, set attributes and addition to the HTML.
-    var gameScreen = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    gameScreen.setAttribute("width", "1000px");
-    gameScreen.setAttribute("height", "700px");
-    gameScreen.id = "gameScreen";
-    document.body.appendChild(gameScreen);
 
-    //  Creation of the gameBorder<svg>, set attributes and addition to the gameBorder<svg>.
-    var gameBorder = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    gameBorder.setAttribute("x", "0");
-    gameBorder.setAttribute("y", "0");
-    gameBorder.setAttribute("width", "1000");
-    gameBorder.setAttribute("height", "700");
-    gameBorder.id = "gameBorder";
-    gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
-    document.getElementById('gameScreen').appendChild(gameBorder);
-
-    //  Creation of the sound effect for HeroShip bullet.
-    var bulletSound = document.createElement("AUDIO");
-    bulletSound.src = "bullet.mp3"
-    bulletSound.controls = false;
-    bulletSound.id = "bullet";
-    document.body.appendChild(bulletSound);
-
-    //  Creation of the background music.
-    var bgSound = document.createElement("AUDIO");
-    bgSound.src = "howard.mp3"
-    bgSound.controls = false;
-    bgSound.id = "bgSound";
-    bgSound.loop = true;
-    document.body.appendChild(bgSound);
+function createGame() {
 
     var gameEngine = new GameEngine();
     gameEngine.addInvaders();
-    setInterval(() => {
+    var intervalo = setInterval(() => {
         if (gameEngine.pressedA && !gameEngine.pressedD) {
             gameEngine.heroShip.moveLeft();
             gameEngine.heroShip.draw();
@@ -173,7 +189,18 @@ window.onload = () => {
             bulletInvaderShot.draw();
             if ((bulletInvaderShot.axisX >= gameEngine.heroShip.positionX) && (bulletInvaderShot.axisX <= (gameEngine.heroShip.positionX + parseInt(gameEngine.heroShip.heroShip.getAttribute("width")))) && (bulletInvaderShot.endY > gameEngine.heroShip.positionY)) {
                 gameEngine.heroShip.destroy();
-                alert("HAS PERDIDO");
+                clearInterval(intervalo);
+                document.body.innerHTML = "";
+                let imgGameOver = document.createElement("img");
+                let pressF5 = document.createElement("h1");
+                let div = document.createElement("div");
+                pressF5.innerHTML = "PRESS F5 to play again";
+                imgGameOver.src = "./gameover.jpg";
+                div.style = "text-align:center;";
+                div.appendChild(imgGameOver);
+                div.appendChild(pressF5);
+                document.body.appendChild(div);
+
             }
             if (bulletInvaderShot.startY + bulletInvaderShot.speed >= 700) {
                 gameEngine.arrayInvaderBullets.splice(0, 1);
@@ -191,4 +218,20 @@ window.onload = () => {
         gameEngine.checkInvadersMoveDown();
 
     }, 10);
+}
+
+window.onload = () => {
+    let imgGameOver = document.createElement("img");
+    let pressF5 = document.createElement("h1");
+    let div = document.createElement("div");
+    div.onclick=()=>{
+        document.body.innerHTML="";
+        createGame();
+    }
+    pressF5.innerHTML = "Click to Play";
+    imgGameOver.src = "./gameover.jpg";
+    div.style = "text-align:center;";
+    div.appendChild(imgGameOver);
+    div.appendChild(pressF5);
+    document.body.appendChild(div);
 }
