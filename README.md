@@ -4,10 +4,10 @@ Hello! We are Miguel Ángel Cívico and Emilio Marín. This repository will cont
 
 ## Files
 
-Invader.js: Contais the creation, movement and erasure of the SVG Image Invader. 
-HeroShip.js: Contais the creation, movement and erasure of the SVG Rect HeroShip. 
-Bullet.js: Contais the creation, movement and erasure of the SVG Line Bullet, for both Invaders and HeroShip. 
-GameEngine.js: Controls all the keyboard inputs, game objects and the main game loop.
+Invader.js: Contais the creation, movement and erasure of the SVG Image Invader.  
+HeroShip.js: Contais the creation, movement and erasure of the SVG Rect HeroShip.  
+Bullet.js: Contais the creation, movement and erasure of the SVG Line Bullet, for both Invaders and HeroShip.  
+GameEngine.js: Controls all the keyboard inputs, game objects and the main game loop.  
 
 ## Live testing URL
 [Click me to play the game!](https://04emiir.github.io/Space-Invaders/)
