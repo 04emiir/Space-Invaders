@@ -187,7 +187,7 @@ function createGame() {
         for (var bulletInvaderShot of gameEngine.arrayInvaderBullets) {
             bulletInvaderShot.moveDown();
             bulletInvaderShot.draw();
-            if ((bulletInvaderShot.axisX >= gameEngine.heroShip.positionX) && (bulletInvaderShot.axisX <= (gameEngine.heroShip.positionX + parseInt(gameEngine.heroShip.heroShip.getAttribute("width")))) && (bulletInvaderShot.endY > gameEngine.heroShip.positionY)) {
+            if ((bulletInvaderShot.axisX >= gameEngine.heroShip.positionX) && (bulletInvaderShot.endY <= gameEngine.heroShip.positionY + 30) && (bulletInvaderShot.endY >= gameEngine.heroShip.positionY) && (bulletInvaderShot.axisX <= (gameEngine.heroShip.positionX + parseInt(gameEngine.heroShip.heroShip.getAttribute("width")))) /*&& (bulletInvaderShot.endY > gameEngine.heroShip.positionY)*/) {
                 gameEngine.heroShip.destroy();
                 clearInterval(intervalo);
                 document.body.innerHTML = "";
