@@ -214,16 +214,17 @@ function createGame() {
             let imgGameOver = document.createElement("img");
             let pressF5 = document.createElement("h1");
             let div = document.createElement("div");
-            pressF5.innerHTML = "YOU WON. PRESS F5 to play again";
+            pressF5.innerHTML = "PRESS F5 to play again";
             imgGameOver.src = "./gameover.jpg";
             div.style = "text-align:center;";
             div.appendChild(imgGameOver);
             gameEngine.arrayInvaderBullets.splice(0, 1);
             div.appendChild(pressF5);
             document.body.appendChild(div);
-            gameEngine.invaderShoots();
-            gameEngine.checkInvadersMoveDown();
         }
+        gameEngine.invaderShoots();
+        gameEngine.checkInvadersMoveDown();
+
     }, 10);
 }
 
