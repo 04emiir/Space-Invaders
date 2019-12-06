@@ -132,8 +132,10 @@ window.onload = () => {
     bgSound.id = "bgSound";
     bgSound.loop = true;
     document.body.appendChild(bgSound);
-
+    
+    
     var gameEngine = new GameEngine();
+    
     gameEngine.addInvaders();
     setInterval(() => {
         if (gameEngine.pressedA && !gameEngine.pressedD) {
