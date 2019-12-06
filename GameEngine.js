@@ -149,7 +149,7 @@ class GameEngine {
 function createGame() {
 
     var gameEngine = new GameEngine();
-    
+
     gameEngine.addInvaders();
     var intervalo = setInterval(() => {
         if (gameEngine.pressedA && !gameEngine.pressedD) {
@@ -209,11 +209,21 @@ function createGame() {
             alien.wholeMovement();
             alien.draw();
         }
-        if (gameEngine.arrayInvader.length == 0)
-            alert("ganaste");
-        gameEngine.invaderShoots();
-        gameEngine.checkInvadersMoveDown();
-
+        if (gameEngine.arrayInvader.length == 0) {
+            document.body.innerHTML = "";
+            let imgGameOver = document.createElement("img");
+            let pressF5 = document.createElement("h1");
+            let div = document.createElement("div");
+            pressF5.innerHTML = "YOU WON. PRESS F5 to play again";
+            imgGameOver.src = "./gameover.jpg";
+            div.style = "text-align:center;";
+            div.appendChild(imgGameOver);
+            gameEngine.arrayInvaderBullets.splice(0, 1);
+            div.appendChild(pressF5);
+            document.body.appendChild(div);
+            gameEngine.invaderShoots();
+            gameEngine.checkInvadersMoveDown();
+        }
     }, 10);
 }
 
@@ -221,8 +231,8 @@ window.onload = () => {
     let imgGameOver = document.createElement("img");
     let pressF5 = document.createElement("h1");
     let div = document.createElement("div");
-    div.onclick=()=>{
-        document.body.innerHTML="";
+    div.onclick = () => {
+        document.body.innerHTML = "";
         createGame();
     }
     pressF5.innerHTML = "Click to Play";
