@@ -146,47 +146,8 @@ class GameEngine {
     }
 }
 
-<<<<<<< HEAD
-
 function createGame() {
 
-=======
-window.onload = () => {
-    //  Creation of the gameScreen<svg>, set attributes and addition to the HTML.
-    var gameScreen = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    gameScreen.setAttribute("width", "1000px");
-    gameScreen.setAttribute("height", "700px");
-    gameScreen.id = "gameScreen";
-    document.body.appendChild(gameScreen);
-
-    //  Creation of the gameBorder<svg>, set attributes and addition to the gameBorder<svg>.
-    var gameBorder = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    gameBorder.setAttribute("x", "0");
-    gameBorder.setAttribute("y", "0");
-    gameBorder.setAttribute("width", "1000");
-    gameBorder.setAttribute("height", "700");
-    gameBorder.id = "gameBorder";
-    gameBorder.style = "fill:black;stroke-width:5;stroke:rgb(0,100,0)"
-    document.getElementById('gameScreen').appendChild(gameBorder);
-
-    //  Creation of the sound effect for HeroShip bullet.
-    var bulletSound = document.createElement("AUDIO");
-    bulletSound.src = "bullet.mp3"
-    bulletSound.controls = false;
-    bulletSound.id = "bullet";
-    document.body.appendChild(bulletSound);
-
-    //  Creation of the background music.
-    var bgSound = document.createElement("AUDIO");
-    bgSound.src = "howard.mp3"
-    bgSound.controls = false;
-    bgSound.id = "bgSound";
-    bgSound.loop = true;
-    bgSound.volume = 0.6;
-    document.body.appendChild(bgSound);
-    
-    
->>>>>>> 1225aae1dceb85bfbc20529a28b9e0c3bf968f78
     var gameEngine = new GameEngine();
     
     gameEngine.addInvaders();
@@ -237,13 +198,10 @@ window.onload = () => {
                 imgGameOver.src = "./gameover.jpg";
                 div.style = "text-align:center;";
                 div.appendChild(imgGameOver);
+                gameEngine.arrayInvaderBullets.splice(0, 1);
                 div.appendChild(pressF5);
                 document.body.appendChild(div);
 
-            }
-            if (bulletInvaderShot.startY + bulletInvaderShot.speed >= 700) {
-                gameEngine.arrayInvaderBullets.splice(0, 1);
-                bulletInvaderShot.disappear();
             }
 
         }
