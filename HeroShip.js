@@ -8,7 +8,7 @@ export class HeroShip {
         this.heroShip.setAttribute("y", "650");
         this.heroShip.setAttribute("width", "50");
         this.heroShip.setAttribute("height", "20");
-        this.heroShip.setAttribute("fill", "green");
+        this.heroShip.setAttribute("fill", "rgb(0,255,0)");
         
         //  Some helpful variables
         this.speed = 7;

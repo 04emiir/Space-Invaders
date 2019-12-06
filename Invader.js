@@ -3,7 +3,7 @@ import { Bullet } from './Bullet.js';
 export class Invader {
     constructor(positionX, positionY, height=30, width=60) {
         //  Creation of the Invader<rect> and some variables
-        this.invader = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        this.invader = document.createElementNS("http://www.w3.org/2000/svg", "image");
         this.positionX = positionX;
         this.positionY = positionY;
         this.height = height;
@@ -13,9 +13,9 @@ export class Invader {
         //  Attributes for Invader<invader>
         this.invader.setAttribute("x", positionX);
         this.invader.setAttribute("y", positionY);
-        this.invader.setAttribute("fill", "yellow");
         this.invader.setAttribute("width", width);
         this.invader.setAttribute("height", height);
+        this.invader.setAttribute("href", "alien.png");
         
         //  Helpful variable
         this.invaderWidth = parseInt(this.invader.getAttribute("width")); 
