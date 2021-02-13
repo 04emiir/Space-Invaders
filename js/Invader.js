@@ -15,7 +15,7 @@ export class Invader {
         this.invader.setAttribute("y", positionY);
         this.invader.setAttribute("width", width);
         this.invader.setAttribute("height", height);
-        this.invader.setAttribute("href", "../assets/alien.png");
+        this.invader.setAttribute("href", "./assets/alien.png");
         
         //  Helpful variable
         this.invaderWidth = parseInt(this.invader.getAttribute("width")); 
