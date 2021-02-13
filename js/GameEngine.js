@@ -129,7 +129,7 @@ class GameEngine {
     createBulletSound() {
         //  Creation of the sound effect for HeroShip bullet.
         var bulletSound = document.createElement("AUDIO");
-        bulletSound.src = "bullet.mp3"
+        bulletSound.src = "../assets/bullet.mp3"
         bulletSound.controls = false;
         bulletSound.id = "bullet";
         document.body.appendChild(bulletSound);
@@ -138,7 +138,7 @@ class GameEngine {
     createBackgroundMusic() {
         //  Creation of the background music.
         var bgSound = document.createElement("AUDIO");
-        bgSound.src = "howard.mp3"
+        bgSound.src = "../assets/howard.mp3"
         bgSound.controls = false;
         bgSound.id = "bgSound";
         bgSound.loop = true;
@@ -195,7 +195,7 @@ function createGame() {
                 let pressF5 = document.createElement("h1");
                 let div = document.createElement("div");
                 pressF5.innerHTML = "PRESS F5 to play again";
-                imgGameOver.src = "./gameover.jpg";
+                imgGameOver.src = "../assets/gameover.jpg";
                 div.style = "text-align:center;";
                 div.appendChild(imgGameOver);
                 gameEngine.arrayInvaderBullets.splice(0, 1);
@@ -215,7 +215,7 @@ function createGame() {
             let pressF5 = document.createElement("h1");
             let div = document.createElement("div");
             pressF5.innerHTML = "PRESS F5 to play again";
-            imgGameOver.src = "./gameover.jpg";
+            imgGameOver.src = "../assets/gameover.jpg";
             div.style = "text-align:center;";
             div.appendChild(imgGameOver);
             gameEngine.arrayInvaderBullets.splice(0, 1);
@@ -237,7 +237,7 @@ window.onload = () => {
         createGame();
     }
     pressF5.innerHTML = "Click to Play";
-    imgGameOver.src = "./gameover.jpg";
+    imgGameOver.src = "../assets/gameover.jpg";
     div.style = "text-align:center;";
     div.appendChild(imgGameOver);
     div.appendChild(pressF5);

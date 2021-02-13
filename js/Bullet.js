@@ -5,7 +5,7 @@ export class Bullet {
         this.axisX = axisX;
         this.startY = startY;
         this.endY = endY;
-        this.speed = 2;
+        this.speed = 4;
         this.bulletColor = color;
         //  Attributes for Bullet<line>.
         this.bullet.setAttribute("x1", this.axisX);

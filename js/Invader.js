@@ -8,14 +8,14 @@ export class Invader {
         this.positionY = positionY;
         this.height = height;
         this.width = width;
-        this.speed = 0.5;
+        this.speed = 1.4;
         
         //  Attributes for Invader<invader>
         this.invader.setAttribute("x", positionX);
         this.invader.setAttribute("y", positionY);
         this.invader.setAttribute("width", width);
         this.invader.setAttribute("height", height);
-        this.invader.setAttribute("href", "alien.png");
+        this.invader.setAttribute("href", "../assets/alien.png");
         
         //  Helpful variable
         this.invaderWidth = parseInt(this.invader.getAttribute("width")); 
