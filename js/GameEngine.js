@@ -7,7 +7,6 @@ class GameEngine {
         this.createGameScreen();
         this.createGameBorder();
         this.createBulletSound();
-        this.createBackgroundMusic();
         this.heroShip = new HeroShip();
         this.arrayBullets = new Array();
         this.arrayInvaderBullets = new Array();
@@ -73,7 +72,7 @@ class GameEngine {
                     cadaInvader.positionY += 30;
                     cadaInvader.draw();
                     cadaInvader.invaderDirection = true;
-                    cadaInvader.speed = 0.5;
+                    cadaInvader.speed = 1.4;
                 }
             }
             else if (invader.positionX >= 940 && invader.invaderDirection) {
@@ -82,7 +81,7 @@ class GameEngine {
                     cadaInvader.positionY += 30;
                     cadaInvader.draw();
                     cadaInvader.invaderDirection = false;
-                    cadaInvader.speed = 0.5;
+                    cadaInvader.speed = 1.4;
                 }
             }
         }
@@ -129,21 +128,12 @@ class GameEngine {
     createBulletSound() {
         //  Creation of the sound effect for HeroShip bullet.
         var bulletSound = document.createElement("AUDIO");
-        bulletSound.src = "/assets/bullet.mp3"
+        bulletSound.src = "./assets/bullet.mp3"
         bulletSound.controls = false;
         bulletSound.id = "bullet";
         document.body.appendChild(bulletSound);
     }
 
-    createBackgroundMusic() {
-        //  Creation of the background music.
-        var bgSound = document.createElement("AUDIO");
-        bgSound.src = "/assets/howard.mp3"
-        bgSound.controls = false;
-        bgSound.id = "bgSound";
-        bgSound.loop = true;
-        document.body.appendChild(bgSound);
-    }
 }
 
 function createGame() {
@@ -195,7 +185,7 @@ function createGame() {
                 let pressF5 = document.createElement("h1");
                 let div = document.createElement("div");
                 pressF5.innerHTML = "PRESS F5 to play again";
-                imgGameOver.src = "/assets/gameover.jpg";
+                imgGameOver.src = "./assets/gameover.jpg";
                 div.style = "text-align:center;";
                 div.appendChild(imgGameOver);
                 gameEngine.arrayInvaderBullets.splice(0, 1);
@@ -215,7 +205,7 @@ function createGame() {
             let pressF5 = document.createElement("h1");
             let div = document.createElement("div");
             pressF5.innerHTML = "PRESS F5 to play again";
-            imgGameOver.src = "/assets/gameover.jpg";
+            imgGameOver.src = "./assets/gameover.jpg";
             div.style = "text-align:center;";
             div.appendChild(imgGameOver);
             gameEngine.arrayInvaderBullets.splice(0, 1);
@@ -239,7 +229,7 @@ window.onload = () => {
     }
     pressF5.innerHTML = "Click to Play";
     controles.innerHTML = "A = Move Left </br> D = Move Right </br> Spacebar = Shot";
-    imgGameOver.src = "/assets/gameover.jpg";
+    imgGameOver.src = "./assets/gameover.jpg";
     div.style = "text-align:center;";
     div.appendChild(imgGameOver);
     div.appendChild(pressF5);
