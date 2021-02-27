@@ -23,7 +23,6 @@ class GameEngine {
     }
 
     keyboardInput(e) {
-        document.getElementById("bgSound").play();
         var key = e.key;
         if (key == "a" || key == "A") {
             this.pressedA = true;
@@ -43,7 +42,7 @@ class GameEngine {
                 this.cooldown = setTimeout(() => {
                     this.puedeDisparar = true;
                     this.cooldown = null;
-                }, 2000);
+                }, 1500);
             }
 
         }
